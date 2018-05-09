@@ -107,7 +107,7 @@ EXCHANGES = {
 }
 
 def get_json(exchange):
-    """Returns a dict representing bids/asks for the current exchange."""
+    """Returns a dict representing bids/asks for the exchange."""
     url = EXCHANGES[exchange]['url']
     params = EXCHANGES[exchange]['params']
     delay = EXCHANGES[exchange]['delay']

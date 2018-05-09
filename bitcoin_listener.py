@@ -37,7 +37,7 @@ class OrderBook(Thread):
     
     def __init__(self, exchange = DEFAULT_EXCHANGE, price_num_digits=8, amount_num_digits=3):
         super(OrderBook, self).__init__()
-        self._keep_running = True
+        self._keep_running = False
         self.price_num_digits = price_num_digits
         self.amount_num_digits = amount_num_digits
         self.orderbook_dict = {}
@@ -227,7 +227,7 @@ class OrderBook(Thread):
 
     def run(self):
         """Set thread to run and fetch orderbook for current exchange."""
-        self.keep_running = True
+        self._keep_running = True
         delay = self.EXCHANGES[self.exchange]['delay']
         time.sleep(random.randint(1, delay))
         while self._keep_running:
