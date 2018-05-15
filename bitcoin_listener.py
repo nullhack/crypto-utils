@@ -10,6 +10,11 @@ import sys
 import doctest
 from decimal import Decimal, Context, ROUND_HALF_EVEN
 from exchanges_api import DEFAULT_EXCHANGE, EXCHANGES
+import configparser
+
+config = configparser.ConfigParser()
+config.read('./config.ini')
+
 
 class OrderBook(Thread):
     """This class handle read and write methods for bitcoin data.
@@ -179,7 +184,10 @@ class OrderBook(Thread):
     def save_orderbook(self, base_path=None):
         """Save orderbook dict to a file."""
         if not base_path:
-            base_path = './orderbook'
+            try:
+                base_path = config['DEFAULT']['source_orderbook']
+            except:
+                base_path = './orderbook'
         base_path = os.path.join(base_path, self.exchange)
         if not os.path.exists(base_path):
             os.makedirs(base_path)
